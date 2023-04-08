@@ -180,5 +180,21 @@ with sq.connect('dekanat.db') as con:
     cursor.execute("""UPDATE spec SET name = 'Новая специальность' WHERE id = 3""")
     cursor.execute("""UPDATE subject SET name = 'Новый предмет' WHERE id = 4""")
 
-    for value in cursor.execute("""SELECT * FROM subject"""):
+    # for value in cursor.execute("""SELECT * FROM subject"""):
+    #     print(value)
+
+
+# #DELETE (РУСЛАНУС)
+
+with sq.connect('dekanat.db') as con:
+    cursor = con.cursor()
+
+    # cursor.execute("""DELETE FROM applicants WHERE receipt_date < '2020-01-01'""") #1
+    cursor.execute("""SELECT DISTINCT spec_id FROM curriculum""")
+    specialities = cursor.fetchall()
+    specialities_ids = [s[0] for s in specialities]
+    cursor.execute(f"DELETE FROM curriculum WHERE spec_id NOT IN ({','.join('?' * len(specialities_ids))})", specialities_ids) #2
+    
+    
+    for value in cursor.execute("""SELECT * FROM curriculum"""):
         print(value)
