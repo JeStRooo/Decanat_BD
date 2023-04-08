@@ -147,6 +147,9 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO sub_form VALUES (1, "Программирование")""")
         cursor.execute("""INSERT INTO sub_form VALUES (2, "Математика")""")
         cursor.execute("""INSERT INTO sub_form VALUES (3, "Физическая культура")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (4, "Гуманитарные")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (5, "Сетевые")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (6, "Мусорный")""")
 
         # Заполнение учебного плана
         cursor.execute("""INSERT INTO curriculum VALUES (1, 1, 1, 1, 30, 20, 10, 1)""") # Для ОАП, Форма сдачи предмета - Программирование
@@ -155,6 +158,10 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO curriculum VALUES (4, 1, 9, 2, 60, 50, 40, 0)""") # Для Дискретки, Форма сдачи предмета - Математика
         cursor.execute("""INSERT INTO curriculum VALUES (5, 1, 10, 2, 70, 40, 30, 1)""") # Для Теории Вероятности, Форма сдачи предмета - Математика
         cursor.execute("""INSERT INTO curriculum VALUES (6, 1, 6, 3, 70, 40, 30, 1)""") # Для Физ-ры, Форма сдачи предмета - Физическая культура
+        cursor.execute("""INSERT INTO curriculum VALUES (7, 1, 7, 4, 70, 40, 30, 1)""") # Для Истории, Форма сдачи предмета - Гуманитарные
+        cursor.execute("""INSERT INTO curriculum VALUES (8, 1, 8, 4, 70, 40, 30, 1)""") # Для Стандартизации, Форма сдачи предмета - Гуманитарные
+        cursor.execute("""INSERT INTO curriculum VALUES (9, 1, 5, 5, 70, 40, 30, 1)""") # Для АПС, Форма сдачи предмета - Сетевые
+        cursor.execute("""INSERT INTO curriculum VALUES (10, 1, 4, 5, 70, 40, 30, 1)""") # Для КС, Форма сдачи предмета - Сетевые
 
         # Заполнение абитуриентов
         cursor.execute("""INSERT INTO applicants VALUES (1, "Кобелев", "Евгений", "Николаевич", "М", "2005-04-21", "г. Ростов-на-Дону", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
