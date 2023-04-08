@@ -144,15 +144,17 @@ if not os.path.exists('dekanat.db'):
 
 
         # Заполнение формы сдачи предметов
-        cursor.execute("""INSERT INTO sub_form VALUES (1, "С")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (1, "Программирование")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (2, "Математика")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (3, "Физическая культура")""")
 
         # Заполнение учебного плана
-        cursor.execute("""INSERT INTO curriculum VALUES (1, 1, 1, 1, 30, 20, 10, 1)""")
-        cursor.execute("""INSERT INTO curriculum VALUES (2, 2, 2, 2, 40, 30, 20, 0)""")
-        cursor.execute("""INSERT INTO curriculum VALUES (3, 3, 3, 3, 50, 40, 30, 1)""")
-        cursor.execute("""INSERT INTO curriculum VALUES (4, 4, 4, 4, 60, 50, 40, 0)""")
-        cursor.execute("""INSERT INTO curriculum VALUES (5, 5, 5, 5, 70, 40, 30, 1)""")
-        cursor.execute("""INSERT INTO curriculum VALUES (6, 5, 5, 5, 70, 40, 30, 1)""")
+        cursor.execute("""INSERT INTO curriculum VALUES (1, 1, 1, 1, 30, 20, 10, 1)""") # Для ОАП, Форма сдачи предмета - Программирование
+        cursor.execute("""INSERT INTO curriculum VALUES (2, 1, 2, 1, 40, 30, 20, 0)""") # Для БД, Форма сдачи предмета - Программирование
+        cursor.execute("""INSERT INTO curriculum VALUES (3, 1, 3, 1, 50, 40, 30, 1)""") # Для Web'а, Форма сдачи предмета - Программирование
+        cursor.execute("""INSERT INTO curriculum VALUES (4, 1, 9, 2, 60, 50, 40, 0)""") # Для Дискретки, Форма сдачи предмета - Математика
+        cursor.execute("""INSERT INTO curriculum VALUES (5, 1, 10, 2, 70, 40, 30, 1)""") # Для Теории Вероятности, Форма сдачи предмета - Математика
+        cursor.execute("""INSERT INTO curriculum VALUES (6, 1, 6, 3, 70, 40, 30, 1)""") # Для Физ-ры, Форма сдачи предмета - Физическая культура
 
         # Заполнение абитуриентов
         cursor.execute("""INSERT INTO applicants VALUES (1, "Кобелев", "Евгений", "Николаевич", "М", "2005-04-21", "г. Ростов-на-Дону", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
