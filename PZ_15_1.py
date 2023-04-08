@@ -171,6 +171,7 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", "Программист", 6, 1, 2)""")
         con.commit()
 
+# UPDATE (ЖЕНЯ)
 with sq.connect('dekanat.db') as con:
     cursor = con.cursor()
 
