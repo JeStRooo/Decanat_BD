@@ -173,6 +173,29 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", "Программист", 6, 1, 2)""")
         con.commit()
 
+#insert (Макс)
+with sq.connect('dekanat.db') as con:
+    cursor = con.cursor()
+
+    grsts = cursor.execute("""SELECT student_name, group_name FROM academic_card""")
+    for grst in grsts:
+        print(grst)
+
+    print("-------------------------------------")
+    grsts = cursor.execute("""SELECT specialty_name FROM academic_card""")
+    i = 0
+    for grst in grsts:
+        print(f"Все специальности {grst}")
+        i = i+1
+    print(f"количество студентов на специальности: {i}")
+    print("-------------------------------------")
+    grsts = cursor.execute("""SELECT name FROM departments""")
+    i = 0
+    for grst in grsts:
+        print(grst)
+        i = i+1
+    
+
 # UPDATE (ЖЕНЯ)
 with sq.connect('dekanat.db') as con:
     cursor = con.cursor()
@@ -182,5 +205,4 @@ with sq.connect('dekanat.db') as con:
     cursor.execute("""UPDATE spec SET name = 'Новая специальность' WHERE id = 3""")
     cursor.execute("""UPDATE subject SET name = 'Новый предмет' WHERE id = 4""")
 
-    for value in cursor.execute("""SELECT * FROM subject"""):
-        print(value)
+   
