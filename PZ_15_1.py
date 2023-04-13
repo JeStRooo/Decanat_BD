@@ -163,12 +163,12 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO applicants VALUES (6, "Пермяков", "Руслан", "Денисович", "М", "2005-03-23", "г. Гуково", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
 
         # Заполнение студенческих карточек
-        cursor.execute("""INSERT INTO academic_card VALUES (1, "Евгений", "ИС-24", "Программист", 1, 1, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (2, "Максим", "ИС-24", "Программист", 3, 1, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (3, "Антон", "ИС-24", "Программист", 4, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (1, "Евгений", "ИС-24", "Программист", 1, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (2, "Максим", "ИС-24", "Программист", 3, 1, 3)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (3, "Антон", "ИС-24", "Программист", 4, 1, 4)""")
         cursor.execute("""INSERT INTO academic_card VALUES (4, "Роман", "ИС-24", "Программист", 9, 1, 5)""")
         cursor.execute("""INSERT INTO academic_card VALUES (5, "Иван", "ИС-24", "Программист", 10, 1, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", "Программист", 6, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", "Программист", 6, 1, 5)""")
         con.commit()
 
 # UPDATE (ЖЕНЯ)
@@ -190,11 +190,27 @@ with sq.connect('dekanat.db') as con:
     cursor = con.cursor()
 
     # cursor.execute("""DELETE FROM applicants WHERE receipt_date < '2020-01-01'""") #1
-    cursor.execute("""SELECT DISTINCT spec_id FROM curriculum""")
-    specialities = cursor.fetchall()
-    specialities_ids = [s[0] for s in specialities]
-    cursor.execute(f"DELETE FROM curriculum WHERE spec_id NOT IN ({','.join('?' * len(specialities_ids))})", specialities_ids) #2
-    
-    
-    for value in cursor.execute("""SELECT * FROM curriculum"""):
+
+    # cursor.execute("""SELECT DISTINCT id_departments FROM spec""")
+    # spec = cursor.fetchall()
+    # spec_ids = [s[0] for s in spec]
+    # cursor.execute(f"DELETE FROM curriculum WHERE spec_id NOT IN ({','.join('?' * len(spec_ids))})", spec_ids) #2
+
+    # cursor.execute("""SELECT DISTINCT id FROM facults""")
+    # facults = cursor.fetchall()
+    # facults_ids = [s[0] for s in facults]
+    # cursor.execute(f"DELETE FROM departments WHERE id_facults NOT IN ({','.join('?' * len(facults_ids))})", facults_ids) #3
+
+    # cursor.execute("""SELECT DISTINCT subject_id FROM curriculum""")
+    # sub_id = cursor.fetchall()
+    # sub_ids = [s[0] for s in sub_id]
+    # cursor.execute(f"DELETE FROM subject WHERE id NOT IN ({','.join('?' * len(sub_ids))})", sub_ids) #4
+
+    # cursor.execute("""DELETE FROM academic_card WHERE grade = null""") #5
+
+    # cursor.execute("""DELETE FROM academic_card WHERE facult = 'Информационные технологии'""") #7
+
+    # cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = null""") #8
+
+    for value in cursor.execute("""SELECT * FROM academic_card"""):
         print(value)
