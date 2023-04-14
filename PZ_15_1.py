@@ -88,7 +88,7 @@ if not os.path.exists('dekanat.db'):
         )
         """)
 
-        # Создание таблицы academic_record (учебная карточка)
+        # Создание таблицы academic_card (учебная карточка)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS academic_card ( 
             id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, 
@@ -141,11 +141,14 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO subject VALUES (8, "Стандартизация, сертификация и техническое документирование")""")
         cursor.execute("""INSERT INTO subject VALUES (9, "Дискретная математика с элементами математической логики")""")
         cursor.execute("""INSERT INTO subject VALUES (10, "Теория вероятностей")""")
+        cursor.execute("""INSERT INTO subject VALUES (11, "Информатика")""")
+        cursor.execute("""INSERT INTO subject VALUES (12, "Математика")""")
+        cursor.execute("""INSERT INTO subject VALUES (13, "Программирование")""")
 
 
         # Заполнение формы сдачи предметов
         cursor.execute("""INSERT INTO sub_form VALUES (1, "Программирование")""")
-        cursor.execute("""INSERT INTO sub_form VALUES (2, "Математика")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (2, "Математика и Информатика")""")
         cursor.execute("""INSERT INTO sub_form VALUES (3, "Физическая культура")""")
         cursor.execute("""INSERT INTO sub_form VALUES (4, "Гуманитарные")""")
         cursor.execute("""INSERT INTO sub_form VALUES (5, "Сетевые")""")
@@ -155,13 +158,16 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO curriculum VALUES (1, 1, 1, 1, 30, 20, 10, 1)""") # Для ОАП, Форма сдачи предмета - Программирование
         cursor.execute("""INSERT INTO curriculum VALUES (2, 1, 2, 1, 40, 30, 20, 0)""") # Для БД, Форма сдачи предмета - Программирование
         cursor.execute("""INSERT INTO curriculum VALUES (3, 1, 3, 1, 50, 40, 30, 1)""") # Для Web'а, Форма сдачи предмета - Программирование
-        cursor.execute("""INSERT INTO curriculum VALUES (4, 1, 9, 2, 60, 50, 40, 0)""") # Для Дискретки, Форма сдачи предмета - Математика
-        cursor.execute("""INSERT INTO curriculum VALUES (5, 1, 10, 2, 70, 40, 30, 1)""") # Для Теории Вероятности, Форма сдачи предмета - Математика
-        cursor.execute("""INSERT INTO curriculum VALUES (6, 1, 6, 3, 70, 40, 30, 1)""") # Для Физ-ры, Форма сдачи предмета - Физическая культура
-        cursor.execute("""INSERT INTO curriculum VALUES (7, 1, 7, 4, 70, 40, 30, 1)""") # Для Истории, Форма сдачи предмета - Гуманитарные
-        cursor.execute("""INSERT INTO curriculum VALUES (8, 1, 8, 4, 70, 40, 30, 1)""") # Для Стандартизации, Форма сдачи предмета - Гуманитарные
-        cursor.execute("""INSERT INTO curriculum VALUES (9, 1, 5, 5, 70, 40, 30, 1)""") # Для АПС, Форма сдачи предмета - Сетевые
-        cursor.execute("""INSERT INTO curriculum VALUES (10, 1, 4, 5, 70, 40, 30, 1)""") # Для КС, Форма сдачи предмета - Сетевые
+        cursor.execute("""INSERT INTO curriculum VALUES (4, 1, 13, 1, 50, 40, 30, 1)""") # Для Программирование, Форма сдачи предмета - Программирование
+        cursor.execute("""INSERT INTO curriculum VALUES (5, 1, 9, 2, 60, 50, 40, 0)""") # Для Дискретки, Форма сдачи предмета - Математика
+        cursor.execute("""INSERT INTO curriculum VALUES (6, 1, 10, 2, 70, 40, 30, 1)""") # Для Теории Вероятности, Форма сдачи предмета - Математика
+        cursor.execute("""INSERT INTO curriculum VALUES (7, 1, 11, 2, 70, 40, 30, 1)""") # Для Информатики, Форма сдачи предмета - Математика
+        cursor.execute("""INSERT INTO curriculum VALUES (8, 1, 12, 2, 70, 40, 30, 1)""") # Для Математика, Форма сдачи предмета - Математика
+        cursor.execute("""INSERT INTO curriculum VALUES (9, 1, 6, 3, 70, 40, 30, 1)""") # Для Физ-ры, Форма сдачи предмета - Физическая культура
+        cursor.execute("""INSERT INTO curriculum VALUES (10, 1, 7, 4, 70, 40, 30, 1)""") # Для Истории, Форма сдачи предмета - Гуманитарные
+        cursor.execute("""INSERT INTO curriculum VALUES (11, 1, 8, 4, 70, 40, 30, 1)""") # Для Стандартизации, Форма сдачи предмета - Гуманитарные
+        cursor.execute("""INSERT INTO curriculum VALUES (12, 1, 5, 5, 70, 40, 30, 1)""") # Для АПС, Форма сдачи предмета - Сетевые
+        cursor.execute("""INSERT INTO curriculum VALUES (13, 1, 4, 5, 70, 40, 30, 1)""") # Для КС, Форма сдачи предмета - Сетевые
 
         # Заполнение абитуриентов
         cursor.execute("""INSERT INTO applicants VALUES (1, "Кобелев", "Евгений", "Николаевич", "М", "2005-04-21", "г. Ростов-на-Дону", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
@@ -184,10 +190,28 @@ if not os.path.exists('dekanat.db'):
 with sq.connect('dekanat.db') as con:
     cursor = con.cursor()
 
-    cursor.execute("""UPDATE facults SET name = 'Новый факультет' WHERE id = 1""")
-    cursor.execute("""UPDATE departments SET name = 'Новая кафедра' WHERE id = 2""")
-    cursor.execute("""UPDATE spec SET name = 'Новая специальность' WHERE id = 3""")
-    cursor.execute("""UPDATE subject SET name = 'Новый предмет' WHERE id = 4""")
+    cursor.execute("""UPDATE facults SET name = 'Новый факультет' WHERE id = 1""") # 1
+    cursor.execute("""UPDATE departments SET name = 'Новая кафедра' WHERE id = 2""") # 2
+    cursor.execute("""UPDATE spec SET name = 'Новая специальность' WHERE id = 3""") # 3
+    cursor.execute("""UPDATE subject SET name = 'Новый предмет' WHERE id = 4""") # 4
+    cursor.execute("""UPDATE sub_form SET name = 'Новая форма сдачи' WHERE id = 5""") # 5
+    cursor.execute("""UPDATE curriculum SET lec_hours = 30 WHERE id = 6""") # 6
+    cursor.execute("""UPDATE curriculum SET lec_hours = 30 WHERE id = 8""") # 7
+    cursor.execute("""UPDATE curriculum SET lab_hours = 30 WHERE id = 4""") # 8
+    cursor.execute("""UPDATE curriculum SET lec_hours = 30, pract_hours = 20 WHERE id = 7""") # 9
+    cursor.execute("""UPDATE curriculum SET lec_hours = 20 WHERE lec_hours > 30""") # 10
 
-    for value in cursor.execute("""SELECT * FROM subject"""):
+    id = input('Введите идентификатор: ')
+    newName = input('Введите новое имя: ')
+
+    cursor.execute(f"""UPDATE applicants SET name = '{newName}' WHERE id = {id}""") # 11
+    cursor.execute("""UPDATE departments SET 'Другое имя кафедры' WHERE id = 1""") # 12
+
+    student_id = input('Введите идентификатор: ')
+    newGrade = input('Введите новую оценку: ')
+
+    cursor.execute(f"""UPDATE academic_card SET grade = {newGrade} WHERE id = {student_id}""") # 13
+    
+
+    for value in cursor.execute("""SELECT * FROM applicants"""):
         print(value)
