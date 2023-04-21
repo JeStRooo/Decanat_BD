@@ -88,7 +88,7 @@ if not os.path.exists('dekanat.db'):
         )
         """)
 
-        # Создание таблицы academic_record (учебная карточка)
+        # Создание таблицы academic_card (учебная карточка)
         cursor.execute("""
         CREATE TABLE IF NOT EXISTS academic_card ( 
             id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, 
@@ -130,6 +130,8 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO spec VALUES (9, "Бухгалтер", 6)""")
         cursor.execute("""INSERT INTO spec VALUES (10, "Банкир", 7)""")
         cursor.execute("""INSERT INTO spec VALUES (11, "Менеджер", 8)""")
+        cursor.execute("""INSERT INTO spec VALUES (12, "Информатика и вычислительная техника", 1)""") #Добавил сам
+        cursor.execute("""INSERT INTO spec VALUES (13, "Программная инженерия", 1)""") #Добавил сам
 
         # Заполнение предметов
         cursor.execute("""INSERT INTO subject VALUES (1, "Основы алгоритмизации и программирования")""")
@@ -148,6 +150,10 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO sub_form VALUES (1, "Программирование")""")
         cursor.execute("""INSERT INTO sub_form VALUES (2, "Математика")""")
         cursor.execute("""INSERT INTO sub_form VALUES (3, "Физическая культура")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (4, "Гуманитарные")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (5, "Сетевые")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (6, "Мусорный")""")
+        cursor.execute("""INSERT INTO sub_form VALUES (7, "Физика и информатика")""")
 
         # Заполнение учебного плана
         cursor.execute("""INSERT INTO curriculum VALUES (1, 1, 1, 1, 30, 20, 10, 1)""") # Для ОАП, Форма сдачи предмета - Программирование
@@ -176,9 +182,15 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO academic_card VALUES (4, "Роман", "ИС-24", 1, 9, 1, 5)""")
         cursor.execute("""INSERT INTO academic_card VALUES (5, "Иван", "ИС-24", 9, 10, 2, 5)""")
         cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", 1, 6, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (7, "Никита", "ИС-101", 13, 2, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (8, "Ян", "ИС-23", 12, 6, 3, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (9, "Мария", "ИС-101", 11, 8, 6, 3)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (10, "Евдокимия", "ИС-21", 12, 2, 1, 4)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (11, "Себастьян", "ИС-21", 12, 9, 2, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (12, "Рамальдо", "ИС-101", 13, 3, 1, 5)""")
         con.commit()
 
-#insert (Макс)
+#select (Макс)
 #1 задание
 with sq.connect('dekanat.db') as con:
     cursor = con.cursor()
@@ -187,30 +199,15 @@ with sq.connect('dekanat.db') as con:
     for grst in grsts:
         print(grst)
 
-    print("-------------------------------------")
-
-    #2 задание
-    print("ЗАДАНИЕ 2")
-    grsts = cursor.execute("""SELECT specialty_name FROM academic_card""")
-    i = 0
-    for grst in grsts:
-        print(f"Все специальности: {grst}")
-        i = i+1
-    print(f"Количество студентов на специальности: {i}")
+    #2 задание не делаю, не имею понятия, как делать
 
     print("-------------------------------------")
 
-    #3 задание
-    print("ЗАДАНИЕ 3")
-    grsts = cursor.execute("""SELECT name FROM spec""")
-    for grst in grsts:
-        print(grst)
-        
-
-    print("-------------------------------------")
+    #3 задание не делаю, не имею понятия, как делать
 
     #4 задание
     print("ЗАДАНИЕ 4")
+    print("количество часов:")
     for i in cursor.execute("""SELECT lec_hours, pract_hours, lab_hours, name FROM curriculum INNER JOIN subject ON curriculum.subject_id = subject.id"""):
         print(i)
 
@@ -221,3 +218,21 @@ with sq.connect('dekanat.db') as con:
     print("студенты с оценкой меньше 4:")
     for i in cursor.execute("""SELECT student_name FROM academic_card WHERE grade < 4"""):
         print(i)
+
+    #6 задание не делаю, нет курсов
+    #7 задание не делаю, нет информации об этом
+    print("-------------------------------------")
+    #8 задание
+    print("ЗАДАНИЕ 8")
+    print("Абитуриенты зачисленные на специальность \"Информатика и вычислительная техника\":")
+    for i in cursor.execute("""SELECT student_name FROM academic_card WHERE specialty_name = 12"""):
+        print(i)
+
+    print("-------------------------------------")
+    #9 задание
+    print("ЗАДАНИЕ 9")
+    print("Предметы, которые изучают студенты группы 101")
+    for i in cursor.execute("""SELECT name FROM academic_card INNER JOIN subject ON academic_card.subject_id = subject.id WHERE group_name = 'ИС-101'"""):
+        print(i)
+
+    #10 задание не делаю, не имею понятия, как делать
