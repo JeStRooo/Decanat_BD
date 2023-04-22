@@ -94,11 +94,10 @@ if not os.path.exists('dekanat.db'):
             id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, 
             student_name VARCHAR(255) NOT NULL, 
             group_name VARCHAR(255) NOT NULL, 
-            specialty_name INT NOT NULL, 
-            subject_id INT NOT NULL, 
-            exam_form_id INT NOT NULL, 
+            specialty_name VARCHAR(255) NOT NULL, 
+            subject_id VARCHAR(255) NOT NULL, 
+            exam_form_id VARCHAR(255) NOT NULL, 
             grade INT NOT NULL, 
-            FOREIGN KEY (specialty_name) REFERENCES spec(id),
             FOREIGN KEY (subject_id) REFERENCES subject(id), 
             FOREIGN KEY (exam_form_id) REFERENCES sub_form(id)
             )
@@ -176,18 +175,18 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO applicants VALUES (6, "Пермяков", "Руслан", "Денисович", "М", "2005-03-23", "г. Гуково", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
 
         # Заполнение студенческих карточек
-        cursor.execute("""INSERT INTO academic_card VALUES (1, "Евгений", "ИС-24", 1, 1, 1, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (2, "Максим", "ИС-24", 2, 3, 1, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (3, "Антон", "ИС-24", 1, 4, 1, 2)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (4, "Роман", "ИС-24", 1, 9, 1, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (5, "Иван", "ИС-24", 9, 10, 2, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", 1, 6, 1, 2)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (7, "Никита", "ИС-101", 13, 2, 1, 2)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (8, "Ян", "ИС-23", 12, 6, 3, 2)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (9, "Мария", "ИС-101", 11, 8, 6, 3)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (10, "Евдокимия", "ИС-21", 12, 2, 1, 4)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (11, "Себастьян", "ИС-21", 12, 9, 2, 5)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (12, "Рамальдо", "ИС-101", 13, 3, 1, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (1, "Евгений", "ИС-24", "Разработчик Web-Мультимедийных приложений", 1, 1, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (2, "Максим", "ИС-24", "Разработчик мобильных/десктопных приложений", 3, 1, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (3, "Антон", "ИС-24", "Разработчик Web-Мультимедийных приложений", 4, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (4, "Роман", "ИС-24", "Разработчик Web-Мультимедийных приложений", 9, 1, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (5, "Иван", "ИС-24", "Прикладной программист", 10, 2, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (6, "Руслан", "ИС-24", "Разработчик Web-Мультимедийных приложений", 6, 1, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (7, "Никита", "ИС-101", "Связист", 2, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (8, "Ян", "ИС-23", "Информатика и вычислительная техника", 6, 3, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (9, "Мария", "ИС-101", "Прикладной программист", 8, 6, 3)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (10, "Евдокимия", "ИС-21", "Банкир", 2, 1, 4)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (11, "Себастьян", "ИС-21", "Банкир", 9, 2, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (12, "Рамальдо", "ИС-101", "Информатика и вычислительная техника", 3, 1, 5)""")
         con.commit()
 
 #select (Макс)
@@ -231,7 +230,7 @@ with sq.connect('dekanat.db') as con:
     #8 задание
     print("ЗАДАНИЕ 8")
     print("Абитуриенты зачисленные на специальность \"Информатика и вычислительная техника\":")
-    for i in cursor.execute("""SELECT student_name FROM academic_card WHERE specialty_name = 12"""):
+    for i in cursor.execute("""SELECT student_name FROM academic_card WHERE specialty_name = 'Информатика и вычислительная техника'"""):
         print(i)
 
     print("-------------------------------------")
