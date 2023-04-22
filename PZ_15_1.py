@@ -195,6 +195,7 @@ if not os.path.exists('dekanat.db'):
 with sq.connect('dekanat.db') as con:
     cursor = con.cursor()
     print("ЗАДАНИЕ 1")
+    print("Список всех студентов с номером группы:")
     grsts = cursor.execute("""SELECT student_name, group_name FROM academic_card""")
     for grst in grsts:
         print(grst)
@@ -207,7 +208,7 @@ with sq.connect('dekanat.db') as con:
 
     #4 задание
     print("ЗАДАНИЕ 4")
-    print("количество часов:")
+    print("Количество часов:")
     for i in cursor.execute("""SELECT lec_hours, pract_hours, lab_hours, name FROM curriculum INNER JOIN subject ON curriculum.subject_id = subject.id"""):
         print(i)
 
@@ -215,12 +216,17 @@ with sq.connect('dekanat.db') as con:
 
     #5 задание
     print("ЗАДАНИЕ 5")
-    print("студенты с оценкой меньше 4:")
+    print("Студенты с оценкой меньше 4:")
     for i in cursor.execute("""SELECT student_name FROM academic_card WHERE grade < 4"""):
         print(i)
 
     #6 задание не делаю, нет курсов
-    #7 задание не делаю, нет информации об этом
+    #7 задание
+    print("-------------------------------------")
+    print("ЗАДАНИЕ 7")
+    print("Студенты, которые сдают курсовую:")
+    for i in cursor.execute("""SELECT student_name FROM academic_card INNER JOIN subject ON academic_card.subject_id = subject.id INNER JOIN curriculum ON subject.id = curriculum.subject_id WHERE course_work = 1"""):
+        print(i)
     print("-------------------------------------")
     #8 задание
     print("ЗАДАНИЕ 8")
