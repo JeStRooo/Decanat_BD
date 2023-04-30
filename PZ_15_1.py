@@ -202,153 +202,153 @@ if not os.path.exists('dekanat.db'):
         con.commit()
 
 #select (Макс)
-# #1 задание
-# with sq.connect('dekanat.db') as con:
-#     cursor = con.cursor()
-#     print("ЗАДАНИЕ 1")
-#     print("Список всех студентов с номером группы:")
-#     grsts = cursor.execute("""SELECT student_name, group_name FROM academic_card""")
-#     for grst in grsts:
-#         print(grst)
+#1 задание
+with sq.connect('dekanat.db') as con:
+    cursor = con.cursor()
+    print("ЗАДАНИЕ 1")
+    print("Список всех студентов с номером группы:")
+    grsts = cursor.execute("""SELECT student_name, group_name FROM academic_card""")
+    for grst in grsts:
+        print(grst)
 
-#     #2 задание не делаю, не имею понятия, как делать
+    #2 задание не делаю, не имею понятия, как делать
 
-#     print("-------------------------------------")
+    print("-------------------------------------")
 
-#     #3 задание не делаю, не имею понятия, как делать
+    #3 задание не делаю, не имею понятия, как делать
 
-#     #4 задание
-#     print("ЗАДАНИЕ 4")
-#     print("Количество часов:")
-#     for i in cursor.execute("""SELECT lec_hours, pract_hours, lab_hours, name FROM curriculum INNER JOIN subject ON curriculum.subject_id = subject.id"""):
-#         print(i)
+    #4 задание
+    print("ЗАДАНИЕ 4")
+    print("Количество часов:")
+    for i in cursor.execute("""SELECT lec_hours, pract_hours, lab_hours, name FROM curriculum INNER JOIN subject ON curriculum.subject_id = subject.id"""):
+        print(i)
 
-#     print("-------------------------------------")
+    print("-------------------------------------")
 
-#     #5 задание
-#     print("ЗАДАНИЕ 5")
-#     print("Студенты с оценкой меньше 4:")
-#     for i in cursor.execute("""SELECT student_name FROM academic_card WHERE grade < 4"""):
-#         print(i)
+    #5 задание
+    print("ЗАДАНИЕ 5")
+    print("Студенты с оценкой меньше 4:")
+    for i in cursor.execute("""SELECT student_name FROM academic_card WHERE grade < 4"""):
+        print(i)
 
-#     #6 задание не делаю, нет курсов
-#     #7 задание
-#     print("-------------------------------------")
-#     print("ЗАДАНИЕ 7")
-#     print("Студенты, которые сдают курсовую:")
-#     for i in cursor.execute("""SELECT student_name FROM academic_card INNER JOIN subject ON academic_card.subject_id = subject.id INNER JOIN curriculum ON subject.id = curriculum.subject_id WHERE course_work = 1"""):
-#         print(i)
-#     print("-------------------------------------")
-#     #8 задание
-#     print("ЗАДАНИЕ 8")
-#     print("Абитуриенты зачисленные на специальность \"Информатика и вычислительная техника\":")
-#     for i in cursor.execute("""SELECT student_name FROM academic_card WHERE specialty_name = 12"""):
-#         print(i)
+    #6 задание не делаю, нет курсов
+    #7 задание
+    print("-------------------------------------")
+    print("ЗАДАНИЕ 7")
+    print("Студенты, которые сдают курсовую:")
+    for i in cursor.execute("""SELECT student_name FROM academic_card INNER JOIN subject ON academic_card.subject_id = subject.id INNER JOIN curriculum ON subject.id = curriculum.subject_id WHERE course_work = 1"""):
+        print(i)
+    print("-------------------------------------")
+    #8 задание
+    print("ЗАДАНИЕ 8")
+    print("Абитуриенты зачисленные на специальность \"Информатика и вычислительная техника\":")
+    for i in cursor.execute("""SELECT student_name FROM academic_card WHERE specialty_name = 12"""):
+        print(i)
 
-#     print("-------------------------------------")
-#     #9 задание
-#     print("ЗАДАНИЕ 9")
-#     print("Предметы, которые изучают студенты группы 101")
-#     for i in cursor.execute("""SELECT name FROM academic_card INNER JOIN subject ON academic_card.subject_id = subject.id WHERE group_name = 'ИС-101'"""):
-#         print(i)
+    print("-------------------------------------")
+    #9 задание
+    print("ЗАДАНИЕ 9")
+    print("Предметы, которые изучают студенты группы 101")
+    for i in cursor.execute("""SELECT name FROM academic_card INNER JOIN subject ON academic_card.subject_id = subject.id WHERE group_name = 'ИС-101'"""):
+        print(i)
 
-#     #10 задание не делаю, не имею понятия, как делать
+    #10 задание не делаю, не имею понятия, как делать
 
 
-# # UPDATE (ЖЕНЯ)
-# with sq.connect('./dekanat.db') as con:
-#     cursor = con.cursor()
+# UPDATE (ЖЕНЯ)
+with sq.connect('./dekanat.db') as con:
+    cursor = con.cursor()
 
-#     cursor.execute("""UPDATE facults SET name = 'Новый факультет' WHERE id = 1""") # 1
-#     cursor.execute("""UPDATE departments SET name = 'Новая кафедра' WHERE id = 2""") # 2
-#     cursor.execute("""UPDATE spec SET name = 'Новая специальность' WHERE id = 3""") # 3
-#     cursor.execute("""UPDATE subject SET name = 'Новый предмет' WHERE id = 4""") # 4
-#     cursor.execute("""UPDATE sub_form SET name = 'Новая форма сдачи' WHERE id = 6""") # 5
-#     cursor.execute("""UPDATE curriculum SET lec_hours = 30 WHERE id = 6""") # 6
-#     cursor.execute("""UPDATE curriculum SET lec_hours = 30 WHERE id = 8""") # 7
-#     cursor.execute("""UPDATE curriculum SET lab_hours = 30 WHERE id = 4""") # 8
-#     cursor.execute("""UPDATE curriculum SET lec_hours = 30, pract_hours = 20 WHERE id = 7""") # 9
-#     cursor.execute("""UPDATE curriculum SET lec_hours = 20 WHERE lec_hours > 30""") # 10
+    cursor.execute("""UPDATE facults SET name = 'Новый факультет' WHERE id = 1""") # 1
+    cursor.execute("""UPDATE departments SET name = 'Новая кафедра' WHERE id = 2""") # 2
+    cursor.execute("""UPDATE spec SET name = 'Новая специальность' WHERE id = 3""") # 3
+    cursor.execute("""UPDATE subject SET name = 'Новый предмет' WHERE id = 4""") # 4
+    cursor.execute("""UPDATE sub_form SET name = 'Новая форма сдачи' WHERE id = 6""") # 5
+    cursor.execute("""UPDATE curriculum SET lec_hours = 30 WHERE id = 6""") # 6
+    cursor.execute("""UPDATE curriculum SET lec_hours = 30 WHERE id = 8""") # 7
+    cursor.execute("""UPDATE curriculum SET lab_hours = 30 WHERE id = 4""") # 8
+    cursor.execute("""UPDATE curriculum SET lec_hours = 30, pract_hours = 20 WHERE id = 7""") # 9
+    cursor.execute("""UPDATE curriculum SET lec_hours = 20 WHERE lec_hours > 30""") # 10
 
-#     id = input('Введите идентификатор: ')
-#     newName = input('Введите новое имя: ')
+    id = input('Введите идентификатор: ')
+    newName = input('Введите новое имя: ')
 
-#     cursor.execute(f"""UPDATE applicants SET name = '{newName}' WHERE id = {id}""") # 11
-#     cursor.execute("""UPDATE departments SET name = 'Другое имя кафедры' WHERE id = 1""") # 12
+    cursor.execute(f"""UPDATE applicants SET name = '{newName}' WHERE id = {id}""") # 11
+    cursor.execute("""UPDATE departments SET name = 'Другое имя кафедры' WHERE id = 1""") # 12
 
-#     student_id = input('Введите идентификатор: ')
-#     newGrade = input('Введите новую оценку: ')
+    student_id = input('Введите идентификатор: ')
+    newGrade = input('Введите новую оценку: ')
 
-#     cursor.execute(f"""UPDATE academic_card SET grade = {newGrade} WHERE id = {student_id}""") # 13
-#     cursor.execute("""UPDATE applicants SET speciality = 'Другая специальность' WHERE speciality = 'Разработчик мобильных/десктопных приложений'""") # 14 сделал без INNER JOIN не через id, а через имя специальности
-#     cursor.execute("""UPDATE academic_card SET grade = 5 WHERE student_name = 'Иван'""")
-#     cursor.execute("""UPDATE facults SET name = 'Другой факультет' where id = 1""") # 15
-#     cursor.execute("""UPDATE curriculum SET lab_hours = 30 where id = 14""") # 16
+    cursor.execute(f"""UPDATE academic_card SET grade = {newGrade} WHERE id = {student_id}""") # 13
+    cursor.execute("""UPDATE applicants SET speciality = 'Другая специальность' WHERE speciality = 'Разработчик мобильных/десктопных приложений'""") # 14 сделал без INNER JOIN не через id, а через имя специальности
+    cursor.execute("""UPDATE academic_card SET grade = 5 WHERE student_name = 'Иван'""")
+    cursor.execute("""UPDATE facults SET name = 'Другой факультет' where id = 1""") # 15
+    cursor.execute("""UPDATE curriculum SET lab_hours = 30 where id = 14""") # 16
 
 
 #DELETE (РУСЛАНУС)
 
-# with sq.connect('dekanat.db') as con:
-#     cursor = con.cursor()
+with sq.connect('dekanat.db') as con:
+    cursor = con.cursor()
 
-    # cursor.execute("""DELETE FROM applicants WHERE receipt_date < '2020-01-01'""") #1
+    cursor.execute("""DELETE FROM applicants WHERE receipt_date < '2020-01-01'""") #1
 
-    # cursor.execute("""SELECT DISTINCT id_departments FROM spec""")
-    # spec = cursor.fetchall()
-    # spec_ids = [s[0] for s in spec]
-    # cursor.execute(f"DELETE FROM curriculum WHERE spec_id NOT IN ({','.join('?' * len(spec_ids))})", spec_ids) #2
+    cursor.execute("""SELECT DISTINCT id_departments FROM spec""")
+    spec = cursor.fetchall()
+    spec_ids = [s[0] for s in spec]
+    cursor.execute(f"DELETE FROM curriculum WHERE spec_id NOT IN ({','.join('?' * len(spec_ids))})", spec_ids) #2
 
-    # cursor.execute("""SELECT DISTINCT id FROM facults""")
-    # facults = cursor.fetchall()
-    # facults_ids = [s[0] for s in facults]
-    # cursor.execute(f"DELETE FROM departments WHERE id_facults NOT IN ({','.join('?' * len(facults_ids))})", facults_ids) #3
+    cursor.execute("""SELECT DISTINCT id FROM facults""")
+    facults = cursor.fetchall()
+    facults_ids = [s[0] for s in facults]
+    cursor.execute(f"DELETE FROM departments WHERE id_facults NOT IN ({','.join('?' * len(facults_ids))})", facults_ids) #3
 
-    # cursor.execute("""SELECT DISTINCT subject_id FROM curriculum""")
-    # sub_id = cursor.fetchall()
-    # sub_ids = [s[0] for s in sub_id]
-    # cursor.execute(f"DELETE FROM subject WHERE id NOT IN ({','.join('?' * len(sub_ids))})", sub_ids) #4
+    cursor.execute("""SELECT DISTINCT subject_id FROM curriculum""")
+    sub_id = cursor.fetchall()
+    sub_ids = [s[0] for s in sub_id]
+    cursor.execute(f"DELETE FROM subject WHERE id NOT IN ({','.join('?' * len(sub_ids))})", sub_ids) #4
 
-    # cursor.execute("""DELETE FROM academic_card WHERE grade = null""") #5
+    cursor.execute("""DELETE FROM academic_card WHERE grade = null""") #5
 
-    # cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = 2""") #6
+    cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = 2""") #6
 
-    # cursor.execute("""DELETE FROM academic_card WHERE facult = 'Информационные технологии'""") #7
+    # cursor.execute("""DELETE FROM academic_card WHERE facults = 'Информационные технологии'""") #7 Нельзя сделать без INNER JOIN
 
-    # cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = null""") #8
+    cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = null""") #8
 
-    # cursor.execute("""SELECT DISTINCT specialty_name FROM academic_card""")
-    # academic_card = cursor.fetchall()
-    # academic_card_specs = [s[0] for s in academic_card]
-    # cursor.execute(f"DELETE FROM applicants WHERE speciality NOT IN ({','.join('?' * len(academic_card_specs))})", academic_card_specs) #9
+    cursor.execute("""SELECT DISTINCT specialty_name FROM academic_card""")
+    academic_card = cursor.fetchall()
+    academic_card_specs = [s[0] for s in academic_card]
+    cursor.execute(f"DELETE FROM applicants WHERE speciality NOT IN ({','.join('?' * len(academic_card_specs))})", academic_card_specs) #9
 
-    # for value in cursor.execute("""SELECT * FROM applicants"""):
-    #     print(value)
+    for value in cursor.execute("""SELECT * FROM applicants"""):
+        print(value)
 
 
 
     #DELETE (Антонус)
 
-    # cursor.execute("""DELETE FROM academic_card WHERE subject_id NOT IN 
-    # (SELECT subject_id FROM curriculum WHERE spec_id = 1 );""") #10
+    cursor.execute("""DELETE FROM academic_card WHERE subject_id NOT IN 
+    (SELECT subject_id FROM curriculum WHERE spec_id = 1 );""") #10
 
-    # cursor.execute("""DELETE FROM applicants WHERE id IN 
-    # (SELECT id FROM academic_card WHERE subject_id = 1);""") #11
+    cursor.execute("""DELETE FROM applicants WHERE id IN 
+    (SELECT id FROM academic_card WHERE subject_id = 1);""") #11
 
-    # cursor.execute("""""") #12 - inner join
+    cursor.execute("""""") #12 - inner join
 
-    # cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = 1;""") #13
+    cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = 1;""") #13
 
-    # cursor.execute("""""") #14 - inner join
+    cursor.execute("""""") #14 - inner join
 
-    # cursor.execute("""DELETE FROM applicants WHERE speciality = 'Информатика';""") 
-    # cursor.execute("""DELETE FROM academic_card WHERE specialty_name = 'Информатика';""") #15
+    cursor.execute("""DELETE FROM applicants WHERE speciality = 'Информатика';""") 
+    cursor.execute("""DELETE FROM academic_card WHERE specialty_name = 'Информатика';""") #15
 
-    # cursor.execute("""DELETE FROM academic_card
-    #                 WHERE specialty_name = 'Информационные технологии'
-    #                 AND subject_id = 15
-    #                 AND grade < (SELECT grade FROM academic_card
-    #                             WHERE specialty_name = 'Информационные технологии'
-    #                             AND subject_id = 15
-    #                             ORDER BY grade DESC LIMIT 1)""") #16
+    cursor.execute("""DELETE FROM academic_card
+                    WHERE specialty_name = 'Информационные технологии'
+                    AND subject_id = 15
+                    AND grade < (SELECT grade FROM academic_card
+                                WHERE specialty_name = 'Информационные технологии'
+                                AND subject_id = 15
+                                ORDER BY grade DESC LIMIT 1)""") #16
 
-    # cursor.execute("""""") #17 - без понятия как сделать
+    cursor.execute("""""") #17 - без понятия как сделать
