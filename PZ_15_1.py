@@ -288,8 +288,8 @@ if not os.path.exists('dekanat.db'):
 
 #DELETE (РУСЛАНУС)
 
-with sq.connect('dekanat.db') as con:
-    cursor = con.cursor()
+# with sq.connect('dekanat.db') as con:
+#     cursor = con.cursor()
 
     # cursor.execute("""DELETE FROM applicants WHERE receipt_date < '2020-01-01'""") #1
 
