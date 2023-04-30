@@ -130,6 +130,8 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO spec VALUES (9, "Бухгалтер", 6)""")
         cursor.execute("""INSERT INTO spec VALUES (10, "Банкир", 7)""")
         cursor.execute("""INSERT INTO spec VALUES (11, "Менеджер", 8)""")
+        cursor.execute("""INSERT INTO spec VALUES (12, "Информатика", 1)""")
+        cursor.execute("""INSERT INTO spec VALUES (13, "Информационные технологии", 1)""")
 
         # Заполнение предметов
         cursor.execute("""INSERT INTO subject VALUES (1, "Основы алгоритмизации и программирования")""")
@@ -146,6 +148,7 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO subject VALUES (12, "Математика")""")
         cursor.execute("""INSERT INTO subject VALUES (13, "Программирование")""")
         cursor.execute("""INSERT INTO subject VALUES (14, "Физика")""")
+        cursor.execute("""INSERT INTO subject VALUES (15, "Алгоритмы и структуры данных")""")
 
         # Заполнение формы сдачи предметов
         cursor.execute("""INSERT INTO sub_form VALUES (1, "Программирование")""")
@@ -179,6 +182,7 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO applicants VALUES (4, "Медведев", "Иван", "Юрьевич", "М", "2005-04-08", "г. Азов", "Номер телефона", "Email", "2021-09-01", "Не определившийся")""")
         cursor.execute("""INSERT INTO applicants VALUES (5, "Зубков", "Роман", "Сергеевич", "М", "2005-04-09", "г. Батайск", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
         cursor.execute("""INSERT INTO applicants VALUES (6, "Пермяков", "Руслан", "Денисович", "М", "2005-03-23", "г. Гуково", "Номер телефона", "Email", "2021-09-01", "Разработчик Web-Мультимедийных приложений")""")
+        cursor.execute("""INSERT INTO applicants VALUES (7, "Путин", "Владимир", "Владимирович", "М", "1952-10-07", "г. Москва", "Номер телефона", "Email", "2021-09-01", "Информатика")""")
 
         # Заполнение студенческих карточек
         cursor.execute("""INSERT INTO academic_card VALUES (1, "Евгений", "ИС-24", "Разработчик Web-Мультимедийных приложений", 1, 1, 5)""")
@@ -191,8 +195,10 @@ if not os.path.exists('dekanat.db'):
         cursor.execute("""INSERT INTO academic_card VALUES (8, "Ян", "ИС-23", "Системный администратор", 6, 3, 2)""")
         cursor.execute("""INSERT INTO academic_card VALUES (9, "Мария", "ИС-101", "Прикладной программист", 8, 6, 3)""")
         cursor.execute("""INSERT INTO academic_card VALUES (10, "Евдокимия", "ИС-21", "Банкир", 2, 1, 4)""")
-        cursor.execute("""INSERT INTO academic_card VALUES (11, "Себастьян", "ИС-21", "Банкир", 9, 2, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (11, "Себастьян", "ИС-21", "Информатика", 9, 2, 5)""")
         cursor.execute("""INSERT INTO academic_card VALUES (12, "Рамальдо", "ИС-101", "Системный администратор", 3, 1, 5)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (13, "Илья", "ИС-124", "Информационные технологии", 15, 1, 2)""")
+        cursor.execute("""INSERT INTO academic_card VALUES (14, "Тихон", "ИС-124", "Информационные технологии", 15, 1, 5)""")
         con.commit()
 
 #select (Макс)
@@ -280,10 +286,10 @@ if not os.path.exists('dekanat.db'):
 #     cursor.execute("""UPDATE curriculum SET lab_hours = 30 where id = 14""") # 16
 
 
-# #DELETE (РУСЛАНУС)
+#DELETE (РУСЛАНУС)
 
-# with sq.connect('dekanat.db') as con:
-#     cursor = con.cursor()
+with sq.connect('dekanat.db') as con:
+    cursor = con.cursor()
 
     # cursor.execute("""DELETE FROM applicants WHERE receipt_date < '2020-01-01'""") #1
 
@@ -318,4 +324,31 @@ if not os.path.exists('dekanat.db'):
     # for value in cursor.execute("""SELECT * FROM applicants"""):
     #     print(value)
 
-   
+
+
+    #DELETE (Антонус)
+
+    # cursor.execute("""DELETE FROM academic_card WHERE subject_id NOT IN 
+    # (SELECT subject_id FROM curriculum WHERE spec_id = 1 );""") #10
+
+    # cursor.execute("""DELETE FROM applicants WHERE id IN 
+    # (SELECT id FROM academic_card WHERE subject_id = 1);""") #11
+
+    # cursor.execute("""""") #12 - inner join
+
+    # cursor.execute("""DELETE FROM academic_card WHERE exam_form_id = 1;""") #13
+
+    # cursor.execute("""""") #14 - inner join
+
+    # cursor.execute("""DELETE FROM applicants WHERE speciality = 'Информатика';""") 
+    # cursor.execute("""DELETE FROM academic_card WHERE specialty_name = 'Информатика';""") #15
+
+    # cursor.execute("""DELETE FROM academic_card
+    #                 WHERE specialty_name = 'Информационные технологии'
+    #                 AND subject_id = 15
+    #                 AND grade < (SELECT grade FROM academic_card
+    #                             WHERE specialty_name = 'Информационные технологии'
+    #                             AND subject_id = 15
+    #                             ORDER BY grade DESC LIMIT 1)""") #16
+
+    # cursor.execute("""""") #17 - без понятия как сделать
